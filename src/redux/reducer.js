@@ -1,14 +1,18 @@
 import * as auth from '../services/auth.js';
 const initialState = {
+    postList: [],
+    search: '',
     username: '',
     password: '',
-    profile_url: ''
+    profile_url: '',
+    myPosts: true
 }
 
 const LOGIN             = 'LOGIN',
       GET_USERNAME      = 'GET_USERNAME',
       GET_PASSWORD      = 'GET_PASSWORD',
       GET_URL           = 'GET_URL',
+      GET_SEARCH_INPUT  = 'GET_SEARCH_INPUT',
       REGISTER          = 'REGISTER';
 
 
@@ -22,6 +26,8 @@ export default function reducer(state=initialState, action) {
             return {...state, password: action.payload}
         case GET_URL:
             return {...state, profile_url: action.payload}
+        case GET_SEARCH_INPUT:
+            return {...state, search: action.payload}
         case REGISTER:
             return {...state}
         default:
@@ -51,6 +57,12 @@ export function handleProfileUrl(profile_url) {
     return {
         type: GET_URL,
         payload: profile_url
+    }
+}
+export function handleSearch(search) {
+    return {
+        type: GET_SEARCH_INPUT,
+        payload: search
     }
 }
 export function register(username, password, profile_url) {

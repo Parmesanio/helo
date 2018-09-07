@@ -5,8 +5,15 @@ module.exports = {
 
         db.create_user([username, password, profile_url])
             .then(newUser => {
-                res.send(newUser).redirect('/dashboard');
+                console.log(newUser);
+                
+                req.session.userid = newUser
+                res.send(req.session);
             })
             .catch(err => console.log('Err in db.create_user', err))
+    },
+    login: (req, res) => {
+        console.log(req.body);
+        
     }
 }
